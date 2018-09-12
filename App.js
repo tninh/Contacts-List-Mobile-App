@@ -23,7 +23,7 @@ export default class App extends React.Component {
     }))
   }
 
-
+// item: {nam: String, phone: String, key: Number}
   renderItem = ({item}) => <Row {...item} />
 
   render() {
