@@ -1,10 +1,12 @@
 import React from 'react';
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Button, SectionList, StyleSheet, Text, View } from 'react-native';
 import {Constants} from 'expo'
 
 import contacts, {compareNames} from './contacts'
 
 import Row from './Row'
+
+import ContactsList from './ContactsList'
 
 export default class App extends React.Component {
   
@@ -24,7 +26,7 @@ export default class App extends React.Component {
   }
 
 // item: {nam: String, phone: String, key: Number}
-  renderItem = ({item}) => <Row {...item} />
+  
 
   render() {
     
@@ -32,11 +34,8 @@ export default class App extends React.Component {
       <View style={styles.container}>
         <Button title="toggle contacts" onPress={this.toggleContacts} />
         <Button title="sort" onPress={this.sort} />
-        {this.state.showContacts && (
-          <FlatList 
-          renderItem={this.renderItem}
-          data = {this.state.contacts} />
-        )
+          {this.state.showContacts && <ContactsList contacts={this.state.contacts} />
+        
         }
       </View>
     );
