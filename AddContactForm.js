@@ -40,7 +40,7 @@ export default class AddContactForm extends React.Component{
                     onChangeText={this.handlePhoneChange} 
                     value={this.state.phone} 
                     keyboardType="numeric" />
-                <Button title="Add Contact" />
+                <Button title="Submit" />
             </View>
         );
     }
