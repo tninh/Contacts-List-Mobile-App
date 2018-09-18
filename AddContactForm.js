@@ -24,8 +24,15 @@ export default class AddContactForm extends React.Component{
         this.setState({name})
     }
 
+    handleSubmit = () => {
+        this.props.onSubmit(this.state)
+    }
+
     handlePhoneChange = phone => {
-        this.setState({phone})
+        if(+phone >= 0)
+        {
+            this.setState({phone})
+        }
     }
 
     render(){
@@ -34,13 +41,15 @@ export default class AddContactForm extends React.Component{
                 <TextInput
                     style = {styles.input} 
                     onChangeText={this.handleNameChange} 
-                    value={this.state.name} />
+                    value={this.state.name} 
+                    placeholder="Name" />
                 <TextInput
                     style={styles.input} 
                     onChangeText={this.handlePhoneChange} 
                     value={this.state.phone} 
-                    keyboardType="numeric" />
-                <Button title="Submit" />
+                    keyboardType="numeric" 
+                    placeholder="Phone" />
+                <Button title="Submit" onPress={this.handleSubmit} />
             </View>
         );
     }
