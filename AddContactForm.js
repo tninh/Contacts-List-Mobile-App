@@ -1,5 +1,6 @@
 import React from 'react'
-import {TextInput, StyleSheet, View, Button} from 'react-native'
+import {TextInput, StyleSheet, View, Button, KeyboardAvoidingView} from 'react-native'
+import {Constants} from 'expo'
 import PropTypes from 'prop-types'
 
 const styles = StyleSheet.create({
@@ -7,6 +8,12 @@ const styles = StyleSheet.create({
         padding: 5,
         borderColor: 'black',
         borderWidth: 1
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        paddingTop: Constants.statusBarHeight,
+        justifyContent: 'center'
     }
 })
 
@@ -28,6 +35,13 @@ export default class AddContactForm extends React.Component{
         }
     }
 
+    getHandler = key => val => {
+        this.setState({[key]: val})
+    }
+
+    // handleNameChange = this.getHandler('name') // val => {this.setState({name: val})}
+    // handlePhoneChange = this.getHandler('phone')
+
     validateForm = () => {
         if(+this.state.phone >= 0 && this.state.phone.length === 10 && this.state.name.length >= 3){
             this.setState({isFormValid: true})
@@ -36,9 +50,9 @@ export default class AddContactForm extends React.Component{
         }
     }
 
-    handleNameChange = name => {
-        this.setState({name})
-    }
+    // handleNameChange = name => {
+    //     this.setState({name})
+    // }
 
     handlePhoneChange = phone => {
         if(+phone >= 0 && phone.length <= 10)
@@ -53,10 +67,10 @@ export default class AddContactForm extends React.Component{
 
     render(){
         return(
-            <View style={{padding: 20}}>
+            <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <TextInput
                     style = {styles.input} 
-                    onChangeText={this.handleNameChange} 
+                    onChangeText={this.getHandler('name')} 
                     value={this.state.name} 
                     placeholder="Name" />
                 <TextInput
@@ -66,7 +80,7 @@ export default class AddContactForm extends React.Component{
                     keyboardType="numeric" 
                     placeholder="Phone" />
                 <Button title="Submit" onPress={this.handleSubmit} disabled={!this.state.isFormValid} />
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
