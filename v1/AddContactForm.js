@@ -35,9 +35,9 @@ export default class AddContactForm extends React.Component{
         }
     }
 
-    getHandler = key => val => {
-        this.setState({[key]: val})
-    }
+    // getHandler = key => val => {
+    //     this.setState({[key]: val})
+    // }
 
     // handleNameChange = this.getHandler('name') // val => {this.setState({name: val})}
     // handlePhoneChange = this.getHandler('phone')
@@ -50,9 +50,9 @@ export default class AddContactForm extends React.Component{
         }
     }
 
-    // handleNameChange = name => {
-    //     this.setState({name})
-    // }
+    handleNameChange = name => {
+        this.setState({name})
+    }
 
     handlePhoneChange = phone => {
         if(+phone >= 0 && phone.length <= 10)
@@ -66,18 +66,19 @@ export default class AddContactForm extends React.Component{
     }
 
     render(){
+        //throw new Error('This is also an error')
         return(
             <KeyboardAvoidingView behavior="padding" style={styles.container}>
                 <TextInput
-                    style = {styles.input} 
-                    onChangeText={this.getHandler('name')} 
-                    value={this.state.name} 
+                    style = {styles.input}
+                    onChangeText={this.handleNameChange}
+                    value={this.state.name}
                     placeholder="Name" />
                 <TextInput
-                    style={styles.input} 
-                    onChangeText={this.handlePhoneChange} 
-                    value={this.state.phone} 
-                    keyboardType="numeric" 
+                    style={styles.input}
+                    onChangeText={this.handlePhoneChange}
+                    value={this.state.phone}
+                    keyboardType="numeric"
                     placeholder="Phone" />
                 <Button title="Submit" onPress={this.handleSubmit} disabled={!this.state.isFormValid} />
             </KeyboardAvoidingView>

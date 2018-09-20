@@ -1,3 +1,7 @@
+import React from 'react'
+// import Example from './examples/0-Switch';
+// export default Example;
+
 import React from 'react';
 import { Button, SectionList, StyleSheet, Text, View } from 'react-native';
 import {Constants} from 'expo'
@@ -8,10 +12,10 @@ import Row from './Row'
 
 import ContactsList from './ContactsList'
 
-import AddContactForm from './AddContactForm'
+
 
 export default class App extends React.Component {
-  
+
     state = {
       showContacts: false,
       showForm: false,
@@ -21,7 +25,7 @@ export default class App extends React.Component {
   addContact = newContact => {
     this.setState(prevState => ({showForm: false, contacts: [...prevState.contacts, newContact]}))
   }
-  
+
   toggleContacts = () => {
     this.setState(prevState => ({showContacts: !prevState.showContacts}))
   }
@@ -42,7 +46,7 @@ export default class App extends React.Component {
   }
 
   render() {
-    if (this.state.showForm) return <AddContactForm onSubmit={this.addContact}/>
+    if (this.state.showForm) return
 
     return (
       <View style={styles.container}>
@@ -50,11 +54,11 @@ export default class App extends React.Component {
         <Button title="Add Contact" onPress={this.toggleForm} />
         <Button title="sort" onPress={this.sort} />
           {this.state.showContacts && <ContactsList contacts={this.state.contacts} />
-        
+
         }
       </View>
     );
-    
+
   }
 }
 
