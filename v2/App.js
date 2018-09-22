@@ -13,13 +13,12 @@ const AppNavigator = createSwitchNavigator({
   AddContact: AddContactScreen,
   ContactList: ContactListScreen
 }, {
-  initialRouteName: ContactList
+  initialRouteName: 'ContactList'
 })
 
 export default class App extends React.Component {
   state = {
     showContacts: true,
-    showForm: false,
     contacts: contacts,
   }
 
@@ -34,17 +33,21 @@ export default class App extends React.Component {
   // showForm = () => {
   //   this.setState({showForm: true})
   // }
+  // showForm = () => {
+  //   this.props.navigation.navigate('AddContact')
+  // }
 
   render() {
     return(
-      <AppNavigator />
+      <AppNavigator screenProps={{contacts: this.state.contacts}} />
     )
   }
+}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingTop: Constants.statusBarHeight,
-  },
-});
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     paddingTop: Constants.statusBarHeight,
+//   },
+// });
